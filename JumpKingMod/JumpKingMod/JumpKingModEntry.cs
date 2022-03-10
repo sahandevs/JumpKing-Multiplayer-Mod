@@ -80,6 +80,10 @@ namespace JumpKingMod
                     achievementDisablePatch.SetUpManualPatch(harmony);
                 }
 
+                Logger.Information($"Initialising MultiPlayer Mod");
+                IManualPatch multiplayerPatch = new MultiPlayerPatch(userSettings, modEntityManager, Logger);
+                multiplayerPatch.SetUpManualPatch(harmony);
+
                 // Run the rest after the game loop has started
                 Task.Run(() =>
                 {

@@ -121,6 +121,7 @@
     <Compile Include="Entities\Raven\RavenLandingPositionsCache.cs" />
     <Compile Include="ModContentManager.cs" />
     <Compile Include="Patching\AchievementRegisterDisableManualPatch.cs" />
+    <Compile Include="Patching\MultiplayerPatch.cs" />
     <Compile Include="Patching\GameStateObserverManualPatch.cs" />
     <Compile Include="JumpKingModEntry.cs" />
     <Compile Include="API\IManualPatch.cs" />
