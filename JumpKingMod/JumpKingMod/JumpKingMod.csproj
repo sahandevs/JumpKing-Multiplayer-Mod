@@ -53,7 +53,7 @@
       <HintPath>..\packages\Google.Apis.YouTube.v3.1.55.0.2449\lib\net45\Google.Apis.YouTube.v3.dll</HintPath>
     </Reference>
     <Reference Include="JumpKing">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Jump King\JumpKing.exe</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Jump King\JumpKing.exe</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -61,7 +61,7 @@
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.8.0.1641, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Jump King\MonoGame.Framework.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Jump King\MonoGame.Framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -163,6 +163,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /E /C /S "$(SolutionDir)JumpKingMod\bin\$(ConfigurationName)\*" "D:\SteamLibrary\steamapps\common\Jump King\Content\Mods"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /E /C /S "$(SolutionDir)JumpKingMod\bin\$(ConfigurationName)\*" "C:\Program Files (x86)\Steam\steamapps\common\Jump King\Content\Mods"</PostBuildEvent>
   </PropertyGroup>
 </Project>
