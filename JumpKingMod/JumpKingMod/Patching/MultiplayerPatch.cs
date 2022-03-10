@@ -36,6 +36,20 @@ namespace JumpKingMod.Patching
             }
         }
 
+        private static GhostPlayerEntity _ghost;
+
+        public static GhostPlayerEntity Ghost
+        {
+            get
+            {
+                if (_ghost == null)
+                {
+                    _ghost = new GhostPlayerEntity(new Vector2(), modEntityManager, logger); ;
+                }
+                return _ghost;
+            }
+        }
+
         public MultiPlayerPatch(UserSettings userSettings, ModEntityManager newModEntityManager, ILogger newLogger)
         {
             logger = newLogger ?? throw new ArgumentNullException(nameof(newLogger));
@@ -73,6 +87,26 @@ namespace JumpKingMod.Patching
 
                 // UiEntity.ScreenSpacePosition = Camera.TransformVector2(new Vector2(10f, 10f));
                 UiEntity.TextValue = $"POS: ({position.X}, {position.Y})\nVEL: ({velocity.X}, {velocity.Y})";
+
+                KeyboardState keyboardState = Keyboard.GetState();
+                var offset = new Vector2(0, 0);
+                if (keyboardState.IsKeyDown(Keys.I))
+                {
+                    offset.Y -= 5f;
+                }
+                if (keyboardState.IsKeyDown(Keys.K))
+                {
+                    offset.Y += 5f;
+                }
+                if (keyboardState.IsKeyDown(Keys.L))
+                {
+                    offset.X += 5f;
+                }
+                if (keyboardState.IsKeyDown(Keys.J))
+                {
+                    offset.X -= 5f;
+                }
+                Ghost.Transform += offset;
             }
             catch (Exception e)
             {

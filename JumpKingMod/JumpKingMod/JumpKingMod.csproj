@@ -104,9 +104,12 @@
     <Compile Include="API\IModEntityState.cs" />
     <Compile Include="API\IYouTubeClientConnector.cs" />
     <Compile Include="Components\LoopingAnimationComponent.cs" />
+    <Compile Include="Entities\GhostPlayer\States\GhostPlayerJumpingState.cs" />
+    <Compile Include="Entities\GhostPlayer\States\GhostPlayerIdleState.cs" />
     <Compile Include="Entities\MessengerRavenSpawningEntity.cs" />
     <Compile Include="Entities\ModEntityManager.cs" />
     <Compile Include="Entities\RavenDebugSpawningEntity.cs" />
+    <Compile Include="Entities\GhostPlayer\GhostPlayerEntity.cs" />
     <Compile Include="Entities\Raven\MessengerRavenEntity.cs" />
     <Compile Include="Entities\Raven\RavenEntity.cs" />
     <Compile Include="Entities\Raven\RavenInsultFileInsultGetter.cs" />

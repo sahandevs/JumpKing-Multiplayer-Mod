@@ -20,7 +20,7 @@ namespace JumpKingMod.Entities
     /// <summary>
     /// An implementation of <see cref="IModEntity"/> which acts as a Raven
     /// </summary>
-    public class RavenEntity : IModEntity, IDisposable
+    public class GhostPlayerEntity : IModEntity, IDisposable
     {
         public enum RavenLogicState
         {
@@ -37,7 +37,6 @@ namespace JumpKingMod.Entities
 
         protected readonly ModEntityManager modEntityManager;
         protected readonly ILogger logger;
-        protected readonly JKContentManager.RavenSprites.RavenContent ravenContent;
         protected readonly Random random;
 
         protected IModEntityState activeAnimationState;
@@ -47,22 +46,21 @@ namespace JumpKingMod.Entities
         protected SpriteEffects spriteEffects;
 
         /// <summary>
-        /// Ctor for creating a <see cref="RavenEntity"/>
+        /// Ctor for creating a <see cref="GhostPlayerEntity"/>
         /// Adds itself to the entity manager
         /// </summary>
-        public RavenEntity(Vector2 transform, ModEntityManager modEntityManager, ILogger logger)
+        public GhostPlayerEntity(Vector2 transform, ModEntityManager modEntityManager, ILogger logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.modEntityManager = modEntityManager ?? throw new ArgumentNullException(nameof(modEntityManager));
             
             this.random = new Random();
-            var settings = JKContentManager.RavenSprites.raven_settings;
-            ravenContent = JKContentManager.RavenSprites.GetRavenContent(settings["raven"]) ?? throw new ArgumentNullException($"Unable to load animations for raven");
+            
             // Initialise the animation state machine for the raven
             InitialiseRavenAnimationStates();
-
-            width = ravenContent.Blink.source.Width;
-            height = ravenContent.Blink.source.Height;
+            
+            width = JKContentManager.PlayerSprites.idle.source.Width;
+            height = JKContentManager.PlayerSprites.idle.source.Height;
             spriteEffects = SpriteEffects.None;
 
             Transform = transform;
@@ -148,11 +146,11 @@ namespace JumpKingMod.Entities
         private void InitialiseRavenAnimationStates()
         {
             // Set up states
-            var idleAnimation = new LoopingAnimationComponent(ravenContent.IdleSprites, 0.1f);
-            RavenIdleState idleState = new RavenIdleState(this, idleAnimation);
-
-            var flyingAnimation = new LoopingAnimationComponent(ravenContent.Fly, 0.05f);
-            RavenFlyingState flyingState = new RavenFlyingState(this, flyingAnimation);
+            var idleAnimation = new LoopingAnimationComponent(new[] { JKContentManager.PlayerSprites.idle }, 0.1f);
+            var idleState = new GhostPlayerIdleState(this, idleAnimation);
+            
+            var flyingAnimation = new LoopingAnimationComponent(new[] { JKContentManager.PlayerSprites.jump_up }, 0.05f);
+            var flyingState = new GhostPlayerJumpingState(this, flyingAnimation);
 
             idleState.TransitionToState = flyingState;
             flyingState.TransitionToState = idleState;
